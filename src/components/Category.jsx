@@ -1,29 +1,28 @@
 import React, { Component, Fragment } from "react";
 import CategoryItems from "./CategoryItems";
+import { getCategories, getCategoryItems } from "../services/menu-service";
 
 class Categories extends Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: null,
-      categoryItem: null,
+      categoryItems: null,
     };
   }
 
-  handleOnClick(id) {
-    fetch(`http://stream-restaurant-menu-svc.herokuapp.com/item?category=${id}`)
-      .then((response) => response.json())
-      .then((categoryItem) => this.setState({ categoryItem }));
+  handleCategoryClick(categoryName) {
+    getCategoryItems(categoryName).then((categoryItems) =>
+      this.setState({ categoryItems })
+    );
   }
 
   componentDidMount() {
-    fetch("http://stream-restaurant-menu-svc.herokuapp.com/category")
-      .then((response) => response.json())
-      .then((categories) => this.setState({ categories }));
+    getCategories().then((categories) => this.setState({ categories }));
   }
 
   render() {
-    const { categories, categoryItem } = this.state;
+    const { categories, categoryItems } = this.state;
     return (
       <Fragment>
         <div className="row">
@@ -34,7 +33,7 @@ class Categories extends Component {
                   <li
                     key={category.id}
                     onClick={() => {
-                      this.handleOnClick(category.short_name);
+                      this.handleCategoryClick(category.short_name);
                     }}
                   >
                     {`${category.name} - (${category.short_name})`}
@@ -43,7 +42,7 @@ class Categories extends Component {
             </ul>
           </div>
           <div className="col-sm-6 col-lg-9">
-            {categoryItem && <CategoryItems categoryItem={categoryItem} />}
+            {categoryItems && <CategoryItems categoryItems={categoryItems} />}
           </div>
         </div>
       </Fragment>

@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 
-const CategoryItems = ({ categoryItem }) => {
+const CategoryItems = ({ categoryItems }) => {
   return (
     <Fragment>
-      {categoryItem && (
+      {categoryItems && (
         <table className="table table-condensed table-striped table-bordered">
           <thead>
             <tr>
@@ -12,7 +12,7 @@ const CategoryItems = ({ categoryItem }) => {
             </tr>
           </thead>
           <tbody>
-            {categoryItem.map((item) => (
+            {categoryItems.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
