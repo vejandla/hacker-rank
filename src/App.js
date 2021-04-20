@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Category from "./components/Category";
+import CategoryContainer from "./components/CategoryContainer";
 class App extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <Category />
+        <CategoryContainer />
       </div>
     );
   }
